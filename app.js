@@ -17,14 +17,20 @@
 
   /**
    * One exclusive channel: only one track plays at a time.
-   * Switching tracks stops the previous one and resets its position.
+   * SFX: switching stops and resets the previous track.
+   * BGM: switching only pauses the previous track, keeping its position
+   * so it resumes where it left off when played again.
    */
-  function createChannel() {
+  function createChannel(resetOnSwitch) {
     var current = null;
     return {
       toggle: function (track) {
         if (current && current !== track) {
-          current.stopAndReset();
+          if (resetOnSwitch) {
+            current.stopAndReset();
+          } else {
+            current.pause();
+          }
         }
         current = track;
         track.togglePlay();
@@ -35,8 +41,8 @@
     };
   }
 
-  var sfxChannel = createChannel();
-  var bgmChannel = createChannel();
+  var sfxChannel = createChannel(true);
+  var bgmChannel = createChannel(false);
 
   function createTrack(item) {
     var audio = new Audio(item.src);
@@ -186,6 +192,9 @@
         audio.currentTime = 0;
         updateProgress();
         updateUI();
+      },
+      pause: function () {
+        audio.pause();
       },
     };
 

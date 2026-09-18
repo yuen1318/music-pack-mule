@@ -1,0 +1,394 @@
+/* Candy circus theme — light pastel */
+:root {
+  --background: 320 60% 97%;
+  --foreground: 280 45% 22%;
+  --card: 0 0% 100%;
+  --muted: 320 35% 90%;
+  --muted-foreground: 290 15% 45%;
+  --primary: 333 85% 60%;
+  --primary-foreground: 0 0% 100%;
+  --secondary: 320 40% 93%;
+  --secondary-foreground: 280 45% 25%;
+  --accent: 333 70% 94%;
+  --border: 315 35% 86%;
+  --ring: 333 85% 60%;
+  --radius: 1rem;
+
+  --candy-pink: linear-gradient(135deg, #ffe0ec, #ffc2da);
+  --candy-mint: linear-gradient(135deg, #dcf8ee, #b8eedd);
+  --candy-lemon: linear-gradient(135deg, #fff3c9, #ffe89e);
+  --candy-sky: linear-gradient(135deg, #dff2ff, #bde4ff);
+  --candy-ink: hsl(280 45% 25%);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html {
+  color-scheme: light;
+}
+
+body {
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background:
+    radial-gradient(circle at 15% 0%, hsl(333 100% 85% / 0.55), transparent 45%),
+    radial-gradient(circle at 90% 20%, hsl(195 100% 85% / 0.5), transparent 45%),
+    radial-gradient(circle at 50% 100%, hsl(45 100% 82% / 0.45), transparent 50%),
+    hsl(var(--background));
+  background-attachment: fixed;
+  color: hsl(var(--foreground));
+  min-height: 100dvh;
+  -webkit-font-smoothing: antialiased;
+}
+
+.page {
+  max-width: 42rem;
+  margin: 0 auto;
+  padding: 1.5rem 1rem calc(1.5rem + env(safe-area-inset-bottom));
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  min-height: 100dvh;
+}
+
+/* Header */
+.header {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  padding-top: 0.5rem;
+}
+
+.header__title {
+  font-family: "Baloo 2", "Inter", sans-serif;
+  font-size: 1.75rem;
+  font-weight: 700;
+  letter-spacing: 0;
+  background: linear-gradient(90deg, #ff4d9d, #f0a500, #12b886, #3db8f5);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.header__subtitle {
+  font-size: 0.875rem;
+  color: hsl(var(--muted-foreground));
+}
+
+/* Sections */
+.main {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  flex: 1;
+}
+
+.section__title {
+  font-family: "Baloo 2", "Inter", sans-serif;
+  font-size: 1.25rem;
+  font-weight: 700;
+  letter-spacing: 0;
+  color: #e0447c;
+  margin-bottom: 0.25rem;
+}
+
+.section__description {
+  font-size: 0.8125rem;
+  color: hsl(var(--muted-foreground));
+  margin-bottom: 0.75rem;
+}
+
+.section__list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.625rem;
+}
+
+/* Card (shadcn card) */
+.card {
+  position: relative;
+  overflow: hidden;
+  background-color: hsl(var(--card));
+  border: 1px solid hsl(var(--border));
+  border-radius: var(--radius);
+  padding: 0.875rem 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.625rem;
+  transition: border-color 0.15s ease, background-color 0.15s ease;
+  user-select: none;
+}
+
+.card:active {
+  background-color: hsl(var(--accent));
+}
+
+.card {
+  box-shadow: 0 1px 4px hsl(320 40% 60% / 0.12);
+}
+
+.card--playing {
+  border-color: hsl(var(--ring) / 0.7);
+  box-shadow: 0 0 18px hsl(333 100% 70% / 0.4);
+}
+
+.card__row {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+/* Play button */
+.card__play-btn {
+  flex-shrink: 0;
+  width: 2.5rem;
+  height: 2.5rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: calc(var(--radius) - 4px);
+  border: none;
+  background: var(--candy-pink);
+  color: var(--candy-ink);
+  box-shadow: 0 2px 6px hsl(320 40% 60% / 0.25);
+  cursor: pointer;
+  transition: filter 0.15s ease, transform 0.1s ease, box-shadow 0.15s ease;
+}
+
+.card__play-btn:active {
+  transform: scale(0.93);
+  filter: brightness(0.97);
+}
+
+.card--playing .card__play-btn {
+  box-shadow: 0 0 14px hsl(333 100% 70% / 0.55);
+}
+
+.card__play-btn svg {
+  width: 1rem;
+  height: 1rem;
+}
+
+.card__info {
+  flex: 1;
+  min-width: 0;
+}
+
+/* BGM layout: big play button on the left, title + slider on the right */
+.card:not(.card--sfx) .card__row {
+  align-items: stretch;
+}
+
+.card:not(.card--sfx) .card__play-btn {
+  width: 3.5rem;
+  height: auto;
+  align-self: stretch;
+}
+
+.card:not(.card--sfx) .card__play-btn svg {
+  width: 1.25rem;
+  height: 1.25rem;
+}
+
+.card__body {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.card__title {
+  font-size: 0.9375rem;
+  font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* SFX pads: square buttons in a grid */
+.section__list--grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.625rem;
+}
+
+.card--sfx {
+  aspect-ratio: 1;
+  padding: 0.75rem 0.5rem;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.card--sfx .card__row {
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+  gap: 0.375rem;
+}
+
+.card--sfx .card__play-btn {
+  width: 100%;
+  flex: 1;
+  min-height: 0;
+  margin: 0;
+}
+
+/* Color-cycle the pads: pink, mint, lemon, sky */
+.section__list--grid .card--sfx:nth-child(4n + 1) .card__play-btn {
+  background: var(--candy-pink);
+}
+
+.section__list--grid .card--sfx:nth-child(4n + 2) .card__play-btn {
+  background: var(--candy-mint);
+}
+
+.section__list--grid .card--sfx:nth-child(4n + 3) .card__play-btn {
+  background: var(--candy-lemon);
+}
+
+.section__list--grid .card--sfx:nth-child(4n + 4) .card__play-btn {
+  background: var(--candy-sky);
+}
+
+.card--sfx .card__play-btn svg {
+  width: 1.75rem;
+  height: 1.75rem;
+}
+
+.card--sfx .card__title {
+  font-size: 0.6875rem;
+  font-weight: 600;
+  text-align: center;
+  color: hsl(var(--foreground));
+}
+
+@media (min-width: 640px) {
+  .section__list--grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/* BGM seek slider (shadcn slider) */
+.slider-row {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+}
+
+.slider-time {
+  font-size: 0.6875rem;
+  color: hsl(var(--muted-foreground));
+  font-variant-numeric: tabular-nums;
+  min-width: 2.5rem;
+  text-align: center;
+}
+
+input[type="range"].seek {
+  -webkit-appearance: none;
+  appearance: none;
+  flex: 1;
+  height: 1.5rem;
+  background: transparent;
+  cursor: pointer;
+  touch-action: pan-y;
+}
+
+input[type="range"].seek::-webkit-slider-runnable-track {
+  height: 0.25rem;
+  border-radius: 9999px;
+  background: linear-gradient(
+    to right,
+    hsl(var(--primary)) 0%,
+    hsl(var(--primary)) var(--fill, 0%),
+    hsl(var(--muted)) var(--fill, 0%),
+    hsl(var(--muted)) 100%
+  );
+}
+
+input[type="range"].seek::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 1rem;
+  height: 1rem;
+  margin-top: -0.375rem;
+  border-radius: 9999px;
+  background: var(--candy-lemon);
+  border: 2px solid hsl(var(--primary));
+  box-shadow: 0 1px 4px hsl(320 40% 50% / 0.35);
+}
+
+input[type="range"].seek::-moz-range-track {
+  height: 0.25rem;
+  border-radius: 9999px;
+  background-color: hsl(var(--muted));
+}
+
+input[type="range"].seek::-moz-range-progress {
+  height: 0.25rem;
+  border-radius: 9999px;
+  background-color: hsl(var(--primary));
+}
+
+input[type="range"].seek::-moz-range-thumb {
+  width: 1rem;
+  height: 1rem;
+  border-radius: 9999px;
+  background: var(--candy-lemon);
+  border: 2px solid hsl(var(--primary));
+  box-shadow: 0 1px 4px hsl(320 40% 50% / 0.35);
+}
+
+/* Update banner */
+.update-banner {
+  position: fixed;
+  left: 1rem;
+  right: 1rem;
+  bottom: calc(1rem + env(safe-area-inset-bottom));
+  max-width: 40rem;
+  margin: 0 auto;
+  padding: 0.75rem 1rem;
+  border-radius: var(--radius);
+  background: var(--candy-pink);
+  color: var(--candy-ink);
+  font-size: 0.875rem;
+  font-weight: 600;
+  text-align: center;
+  cursor: pointer;
+  box-shadow: 0 4px 16px hsl(333 85% 60% / 0.4);
+  opacity: 0;
+  transform: translateY(1rem);
+  pointer-events: none;
+  transition: opacity 0.25s ease, transform 0.25s ease;
+  z-index: 50;
+}
+
+.update-banner.visible {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+/* Footer */
+.footer {
+  text-align: center;
+  font-size: 0.75rem;
+  color: hsl(var(--muted-foreground));
+  padding-top: 1rem;
+  border-top: 1px solid hsl(var(--border));
+}
+
+@media (min-width: 640px) {
+  .page {
+    padding-top: 2.5rem;
+  }
+
+  .header__title {
+    font-size: 1.875rem;
+  }
+}

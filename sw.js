@@ -1,17 +1,22 @@
-const VERSION = '1.1.0'; // ← bump this on each deploy
+const VERSION = '1.2.0'; // ← bump this on each deploy
 const CACHE_NAME = `music-pack-mule-v${VERSION}`;
 const ASSETS_TO_CACHE = [
   './',
   './index.html',
   './styles.css',
+  './fonts.css',
+  './fonts/inter-var.woff2',
+  './fonts/baloo2-var.woff2',
   './app.js',
   './sounds.js',
   './audio/clap.mp3',
   './audio/drum.mp3',
   './audio/announcement.mp3',
-  './audio/claw_machine.mp3'
-  // Note: large BGM files (e.g. tropical-summer-upbeat.mp3) are NOT pre-cached
-  // to keep install fast — they are cached at runtime on first play instead.
+  './audio/host.mp3',
+  './audio/mangarap.mp3'
+  // Note: BGM files (tropical-summer-upbeat, men-of-fire, bloom, claw-machine)
+  // are NOT pre-cached to keep install fast — they are cached at runtime
+  // on first play instead.
 ];
 
 // Pre-cache all listed assets on install

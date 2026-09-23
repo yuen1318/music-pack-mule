@@ -43,11 +43,15 @@
 
   var sfxChannel = createChannel(true);
   var bgmChannel = createChannel(false);
+  var bgmAudios = [];
 
   function createTrack(item) {
     var audio = new Audio(item.src);
-    audio.preload = "metadata";
-    if (item.type === "bgm") audio.loop = true;
+    audio.preload = item.type === "bgm" ? "auto" : "metadata";
+    if (item.type === "bgm") {
+      audio.loop = true;
+      bgmAudios.push(audio);
+    }
 
     var card = document.createElement("div");
     card.className = "card" + (item.type === "bgm" ? "" : " card--sfx");
@@ -275,5 +279,18 @@
     empty.className = "section__description";
     empty.textContent = "No sounds yet — add entries to sounds.js.";
     app.appendChild(empty);
+  }
+
+  // Prefetch BGM files after the page has rendered so they play instantly.
+  function prefetchBgm() {
+    bgmAudios.forEach(function (audio) {
+      audio.load();
+    });
+  }
+
+  if ("requestIdleCallback" in window) {
+    window.requestIdleCallback(prefetchBgm, { timeout: 2000 });
+  } else {
+    window.setTimeout(prefetchBgm, 1000);
   }
 })();

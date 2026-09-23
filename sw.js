@@ -1,4 +1,4 @@
-const VERSION = '1.3.0'; // ← bump this on each deploy
+const VERSION = '1.3.1'; // ← bump this on each deploy
 const CACHE_NAME = `music-pack-mule-v${VERSION}`;
 const ASSETS_TO_CACHE = [
   './',
@@ -14,9 +14,9 @@ const ASSETS_TO_CACHE = [
   './audio/announcement.mp3',
   './audio/host.mp3',
   './audio/mangarap.mp3'
-  // Note: BGM files (tropical-summer-upbeat, men-of-fire, bloom, claw-machine)
-  // are NOT pre-cached to keep install fast — they are cached at runtime
-  // on first play instead.
+  // Note: BGM files are not pre-cached here to keep install fast.
+  // The app prefetches them after page load, and this service worker
+  // caches them at runtime via the fetch handler.
 ];
 
 // Pre-cache all listed assets on install

@@ -15,10 +15,15 @@ const SOUNDS = [
   { title: "ANNOUNCEMENT", src: "audio/announcement.mp3", type: "sound_effects" },
   { title: "HOST ENTRANCE", src: "audio/host.mp3", type: "sound_effects" },
   { title: "MANGARAP", src: "audio/mangarap.mp3", type: "sound_effects" },
+  { title: "SUSPENSE TIMER", src: "audio/suspense-timer.mp3", type: "sound_effects" },
 
   // ---- Background Music ----
   { title: "OFFICIAL BGM", src: "audio/tropical-summer-upbeat.mp3", type: "bgm" },
   { title: "MOF", src: "audio/men-of-fire.mp3", type: "bgm" },
   { title: "BLOOM", src: "audio/bloom.mp3", type: "bgm" },
   { title: "CLAW MACHINE", src: "audio/claw-machine.mp3", type: "bgm" },
+  { title: "HERE WE GO", src: "audio/here-we-go.mp3", type: "bgm" },
+  { title: "LOOKING FOR YOU", src: "audio/looking-for-you.mp3", type: "bgm" },
+  { title: "PSAU LGMDT", src: "audio/psau-lgmdt.mp3", type: "bgm" },
+  { title: "MANGARAP FULL", src: "audio/mangarap-full.mp3", type: "bgm" },
 ];

@@ -1,4 +1,4 @@
-const VERSION = '1.2.0'; // ← bump this on each deploy
+const VERSION = '1.3.0'; // ← bump this on each deploy
 const CACHE_NAME = `music-pack-mule-v${VERSION}`;
 const ASSETS_TO_CACHE = [
   './',
